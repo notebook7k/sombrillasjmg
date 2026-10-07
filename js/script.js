@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const mensaje = `Hola Sombrillas J.M.G, vengo de la web y quiero solicitar presupuesto por los siguientes productos:\n\n${listaFormateada}`;
             
             // Verifica que el número de teléfono sea el correcto
-            const url = `https://wa.me/5491125763258?text=${encodeURIComponent(mensaje)}`;
+            const url = `https://wa.me/5491164802724?text=${encodeURIComponent(mensaje)}`;
             
             window.open(url, '_blank');
         });
