@@ -1,0 +1,837 @@
+/* ===================================================
+   SECCIÓN 1: VARIABLES MODO CLARO (Por defecto)
+   =================================================== */
+/* Definí tus colores oscuros por defecto en :root */
+:root {
+    --bg-main: #121824;          /* Fondo oscuro general */
+    --bg-card: #1e293b;          /* Fondo de tarjetas */
+    --text-main: #e2e8f0;        /* Texto principal claro */
+    --text-muted: #94a3b8;       /* Texto secundario */
+    --text-title: #38bdf8;       /* Títulos en celeste */
+    --border-color: #334155;     /* Bordes */
+}
+
+/* ===================================================
+   SECCIÓN 2: VARIABLES MODO OSCURO
+   =================================================== */
+[data-theme="dark"] {
+    --primary-color: #74c69d;
+    --secondary-color: #52b788;
+    --accent-color: #e9c46a;
+    --bg-light: #121212;
+    --card-bg: #1e1e1e;
+    --header-bg: #181818;
+    --text-dark: #f8f9fa;
+    --text-muted: #cccccc;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --img-placeholder-bg: #2a2a2a;
+    --nav-bg: rgba(24, 24, 24, 0.95);
+    --color-neon: #74c69d44;
+    --nav-link-color: #d2cdd1;
+    --footer-bg: #0d0d0d;
+    --footer-text: #e2e1e1f0;
+}
+
+/* ===================================================
+   SECCIÓN 3: REGLAS GENERALES Y RESET GLOBAL
+   =================================================== */
+html { 
+    scroll-behavior: smooth; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ===================================================
+   SECCIÓN 4: BARRA DE NAVEGACIÓN Y CABECERA
+   =================================================== */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    padding: 10px 15px;
+}
+
+.navbar-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* En celulares muy angostos (menos de 480px), pasamos a columna para que nada se corte */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 10px;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+.brand-logo {
+    font-size: 1.2rem;
+    font-weight: 300 !important;
+    letter-spacing: 1.5px;
+    color: #c6dd69 !important;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .brand-logo {
+        font-size: 1rem;
+    }
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.6px;
+    transition: color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 480px) {
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+}
+
+.nav-links a:hover {
+    color: #c084fc;
+}
+
+.theme-toggle-btn {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .theme-toggle-btn {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.03);
+}
+
+header {
+    background-color: var(--header-bg);
+    text-align: center;
+    padding: 25px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.banner-container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    background: var(--card-bg);
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ===================================================
+   SECCIÓN 5: GRILLA DE PRODUCTOS Y TARJETAS
+   =================================================== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+@media (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--border-color);
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--color-neon);
+    box-shadow: 0 0 12px var(--color-neon);
+}
+
+/* ===================================================
+   SECCIÓN 6: GALERÍA DE IMÁGENES Y DETALLES DEL PRODUCTO
+   =================================================== */
+.product-img {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--img-placeholder-bg);
+}
+
+.main-image-link {
+    display: block;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.main-image-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s;
+}
+
+.main-image-link:hover img {
+    opacity: 0.85;
+}
+
+.thumbnails-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.thumb {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.thumb:hover {
+    border-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.thumb.active-thumb {
+    border-color: var(--primary-color);
+}
+
+.product-content {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Títulos individuales de cada tarjeta de producto */
+.product-card h3, 
+.product-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #6ad7f2;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    min-height: 42px;
+}
+
+.product-features {
+    list-style: none;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.product-features li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 14px;
+}
+
+.product-features li::before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* ===================================================
+   SECCIÓN 7: BOTÓN Y FLOTANTE DE WHATSAPP
+   =================================================== */
+.btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: #25D366;
+    color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--whatsapp-color);
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    transition: transform 0.3s;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* ===================================================
+   SECCIÓN 8: SECCIÓN DE CONTACTO Y FOOTER
+   =================================================== */
+.contact-section {
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 50px 20px 25px 20px;
+    margin-top: 40px;
+    color: var(--footer-text);
+}
+
+.contact-container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.contact-col h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.contact-list {
+    list-style: none;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--footer-text);
+    font-size: 0.9rem;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.contact-list a {
+    color: var(--footer-text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.contact-list a:hover {
+    color: #ffffff;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 3px 8px var(--shadow-color);
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+footer {
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: var(--footer-text);
+}
+
+/* ===================================================
+   SECCIÓN 9: SISTEMA DE CARRITO / VENTANA MODAL
+   =================================================== */
+#btn-carrito {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#btn-carrito i {
+    display: inline-block;
+    font-size: 28px;
+    color: transparent;
+    -webkit-text-stroke: 1.8px #e70899;
+    transform: scaleX(0.82);
+}
+
+.carrito-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contador-carrito {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* Ventanas Modales */
+.modal-oculto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-oculto.activo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-contenido {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    width: 90%;
+    max-width: 450px;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-contacto-ancho {
+    max-width: 480px;
+}
+
+.modal-oculto.activo .modal-contenido {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.cerrar-modal:hover {
+    color: var(--text-dark);
+}
+
+#lista-carrito {
+    list-style: none;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 5px;
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: var(--bg-light);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.btn-eliminar {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.btn-eliminar:hover {
+    background: #e60000;
+}
+
+.btn-whatsapp-modal {
+    width: 100%;
+}
+
+#enviar-whatsapp.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ===================================================
+   SECCIÓN 10: BOTÓN DE CONSULTA (.btn-sumar)
+   =================================================== */
+.btn-sumar {
+    background-color: #262626;
+    color: #9685ac;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s ease;
+    width: 100%;
+}
+
+.btn-sumar i {
+    color: #f43f5e;
+    font-size: 1rem;
+    transition: color 0.25s ease;
+}
+
+.btn-sumar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estado ACTIVADO (Agregado) */
+.btn-sumar.agregado {
+    background-color: #059669 !important;
+    color: #ffffff !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    flex-direction: row-reverse !important;
+}
+
+.btn-sumar.agregado i {
+    color: #ffffff !important;
+}
+
+.btn-sumar.agregado:hover {
+    background-color: #047857 !important;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+}
+
+/* ===================================================
+   SECCIÓN 11: MODAL DE CONTACTO FLOTANTE
+   =================================================== */
+.contact-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-option-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.contact-option-btn:hover {
+    border-color: #10b981;
+    transform: translateY(-2px);
+}
+
+.contact-option-btn i {
+    font-size: 1.5rem;
+    width: 35px;
+    text-align: center;
+}
+
+.contact-option-btn.whatsapp i { color: #25D366; }
+.contact-option-btn.email i { color: #38bdf8; }
+.contact-option-btn.location i { color: #f43f5e; }
+
+.contact-option-btn div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-option-btn strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.contact-option-btn span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.carrito-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.carrito-item-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.carrito-item-titulo {
+    flex-grow: 1;
+    color: var(--text-dark);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Enlace a tu correo con la manito del cursor */
+.developer-signature a {
+    color: #c6dd69; /* Cambiá por el verde/acento de tu web si preferís */
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.developer-signature a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+/* Color verde únicamente para links de texto o footer */
+.contact-list a[href*="wa.me"] i,
+.social-links a[href*="wa.me"] i {
+    color: #25d366 !important;
+}
+
+/* Círculo flotante de WhatsApp */
+.whatsapp-float {
+    background-color: #25d366 !important;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Ícono DENTRO del círculo: Blanco y más grande */
+.whatsapp-float i {
+    color: #ffffff !important;
+    font-size: 38px !important; /* Aumentá este valor si lo querés aún más grande */
+}
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}
+/* ==========================================
+   COLORES INDIVIDUALES DE TÍTULOS POR PRODUCTO
+   ========================================== */
+
+.producto-1 .product-title { color: #5fdd4c; }
+.producto-2 .product-title { color: #5fdd4c; }
+.producto-3 .product-title { color: #5fdd4c; }
+.producto-4 .product-title { color: #5fdd4c; }
+.producto-5 .product-title { color: #5fdd4c; }
+.producto-6 .product-title { color: #5fdd4c; }
+.producto-7 .product-title { color: #5fdd4c; }
+.producto-8 .product-title { color: #5fdd4c; }
+.producto-9 .product-title { color: #5fdd4c; }
+.producto-10 .product-title { color: #5fdd4c; }
+.producto-11 .product-title { color: #5fdd4c; }
+.producto-12 .product-title { color: #5fdd4c; }
+.producto-13 .product-title { color: #5fdd4c; }
+.producto-14 .product-title { color: #5fdd4c; }
